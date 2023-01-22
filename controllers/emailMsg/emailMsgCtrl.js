@@ -1,6 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const nodemailer = require("nodemailer");
-const EmailMsg = require("../../model/Emailmessaging/EmailMessaging");
+const EmailMsg = require("../../model/EmailMessaging/EmailMsg");
 const Filter = require("bad-words");
 const sendEmailMsgCtrl = expressAsyncHandler(async (req, res) => {
   const { to, subject, message } = req.body;
@@ -14,12 +14,8 @@ const sendEmailMsgCtrl = expressAsyncHandler(async (req, res) => {
     const transport = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        type: "OAuth2",
         user: process.env.MAIL,
-        pass: process.env.pass,
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.REFRESH_TOKEN,
+        pass: process.env.GENERATED_APP_PASSWORD,
       },
     });
 
