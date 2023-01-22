@@ -1,6 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const nodemailer = require("nodemailer");
-const EmailMsg = require("../../model/EmailMessaging/EmailMsg");
+const EmailMsg = require("../../model/EmailMessaging/EmailMessaging");
 const Filter = require("bad-words");
 const sendEmailMsgCtrl = expressAsyncHandler(async (req, res) => {
   const { to, subject, message } = req.body;
