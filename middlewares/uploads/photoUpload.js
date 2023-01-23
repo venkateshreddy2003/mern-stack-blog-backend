@@ -1,6 +1,8 @@
 const multer = require("multer");
 const sharp = require("sharp");
 const path = require("path");
+const cloudinaryUploadImg = require("../../utils/cloudinary");
+const fs = require("fs");
 //storage
 const multerStorage = multer.memoryStorage();
 
@@ -36,8 +38,14 @@ const profilePhotoResize = async (req, res, next) => {
     .resize(250, 250)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
-    .toFile(path.join(`${req.file.filename}`));
+    .toFile(path.join(`${req?.file?.filename}`));
+  const imgUploaded = await cloudinaryUploadImg(
+    path.join(`${req?.file?.filename}`)
+  );
   console.log(__dirname);
+  console.log(imgUploaded?.url);
+  req.imgUploadedurl = imgUploaded?.url;
+  fs.unlinkSync(req?.file?.filename);
   next();
 };
 
