@@ -41,14 +41,14 @@ const createPostCtrl = expressAsyncHandler(async (req, res) => {
   }
 
   //1. Get the path to img
-  const localPath = `/opt/render/project/src/middlewares/uploads/${req.file.filename}`;
+  // const localPath = `/opt/render/project/src/middlewares/uploads/${req.file.filename}`;
   //2.Upload to cloudinary
-  const imgUploaded = await cloudinaryUploadImg(localPath);
+  // const imgUploaded = await cloudinaryUploadImg(localPath);
   try {
     const post = await Post.create({
       ...req.body,
       user: _id,
-      image: imgUploaded?.url,
+      image: req?.imgUploadedurl,
     });
     console.log(req.user);
     //update the user post count
@@ -63,9 +63,9 @@ const createPostCtrl = expressAsyncHandler(async (req, res) => {
     );
 
     //Remove uploaded img
-    fs.unlinkSync(localPath);
+    // fs.unlinkSync(localPath);
     res.json(post);
-    res.json("ok post");
+    // res.json("ok post");
   } catch (error) {
     res.json(error);
   }

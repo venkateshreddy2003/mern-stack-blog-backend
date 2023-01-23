@@ -60,6 +60,13 @@ const postImgResize = async (req, res, next) => {
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
     .toFile(path.join(`${req.file.filename}`));
+  const imgUploaded = await cloudinaryUploadImg(
+    path.join(`${req?.file?.filename}`)
+  );
+  console.log(__dirname);
+  console.log(imgUploaded?.url);
+  req.imgUploadedurl = imgUploaded?.url;
+  fs.unlinkSync(req?.file?.filename);
   console.log(__dirname);
   next();
 };
