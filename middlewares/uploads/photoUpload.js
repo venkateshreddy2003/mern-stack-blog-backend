@@ -31,7 +31,7 @@ const profilePhotoResize = async (req, res, next) => {
   //check if there is no file
   if (!req.file) return next();
   req.file.filename = `user-${Date.now()}-${req.file.originalname}`;
-
+  console.log(req.file.filename);
   await sharp(req.file.buffer)
     .resize(250, 250)
     .toFormat("jpeg")
