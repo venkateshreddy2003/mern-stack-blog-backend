@@ -429,7 +429,7 @@ const profilePhotoUploadCtrl = expressAsyncHandler(async (req, res) => {
   const { _id } = req.user;
   //block user
   blockUser(req?.user);
-  //1. Get the oath to img
+  //1. Get the path to img
   const localPath = `public/images/profile/${req.file.filename}`;
   //2.Upload to cloudinary
   const imgUploaded = await cloudinaryUploadImg(localPath);
