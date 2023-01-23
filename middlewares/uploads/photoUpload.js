@@ -32,11 +32,11 @@ const profilePhotoResize = async (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `user-${Date.now()}-${req.file.originalname}`;
 
-  await sharp(req.file.buffer)
-    .resize(250, 250)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(path.join(`public/images/profile/${req.file.filename}`));
+  // await sharp(req.file.buffer)
+  //   .resize(250, 250)
+  //   .toFormat("jpeg")
+  //   .jpeg({ quality: 90 })
+  //   .toFile(path.join(`public/images/profile/${req.file.filename}`));
   console.log(__dirname);
   next();
 };
@@ -47,11 +47,12 @@ const postImgResize = async (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `user-${Date.now()}-${req.file.originalname}`;
 
-  await sharp(req.file.buffer)
-    .resize(500, 500)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(path.join(`public/images/posts/${req.file.filename}`));
+  // await sharp(req.file.buffer)
+  //   .resize(500, 500)
+  //   .toFormat("jpeg")
+  //   .jpeg({ quality: 90 })
+  //   .toFile(path.join(`public/images/posts/${req.file.filename}`));
+  console.log(__dirname);
   next();
 };
 module.exports = { photoUpload, profilePhotoResize, postImgResize };

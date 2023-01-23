@@ -11,6 +11,7 @@ const blockUser = require("../../utils/blockUser");
 //CREATE POST
 //----------------------------------------------------------------
 const createPostCtrl = expressAsyncHandler(async (req, res) => {
+  console.log(__dirname);
   const { _id } = req.user;
   //Display message if user is blocked
   blockUser(req.user);
@@ -40,30 +41,31 @@ const createPostCtrl = expressAsyncHandler(async (req, res) => {
   }
 
   //1. Get the path to img
-  const localPath = `public/images/posts/${req.file.filename}`;
-  //2.Upload to cloudinary
-  const imgUploaded = await cloudinaryUploadImg(localPath);
+  // const localPath = `public/images/posts/${req.file.filename}`;
+  // //2.Upload to cloudinary
+  // const imgUploaded = await cloudinaryUploadImg(localPath);
   try {
-    const post = await Post.create({
-      ...req.body,
-      user: _id,
-      image: imgUploaded?.url,
-    });
-    console.log(req.user);
-    //update the user post count
-    await User.findByIdAndUpdate(
-      _id,
-      {
-        $inc: { postCount: 1 },
-      },
-      {
-        new: true,
-      }
-    );
+    //   const post = await Post.create({
+    //     ...req.body,
+    //     user: _id,
+    //     image: imgUploaded?.url,
+    //   });
+    //   console.log(req.user);
+    //   //update the user post count
+    //   await User.findByIdAndUpdate(
+    //     _id,
+    //     {
+    //       $inc: { postCount: 1 },
+    //     },
+    //     {
+    //       new: true,
+    //     }
+    //   );
 
-    //Remove uploaded img
-    fs.unlinkSync(localPath);
-    res.json(post);
+    //   //Remove uploaded img
+    //   fs.unlinkSync(localPath);
+    //   res.json(post);
+    res.json("ok post");
   } catch (error) {
     res.json(error);
   }
